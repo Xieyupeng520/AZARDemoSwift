@@ -8,10 +8,6 @@
 
 import ARKit
 
-extension SCNVector3 {
-
-}
-
 extension SCNVector3: Equatable {
     
     public static func == (lhs:SCNVector3, rhs:SCNVector3) -> Bool {

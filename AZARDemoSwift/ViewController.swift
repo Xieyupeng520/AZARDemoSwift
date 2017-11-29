@@ -17,28 +17,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var vertorEnd = SCNVector3()
     var isMeasuring = false
     
+    var curLine:Line?
+    
+    var targetView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         sceneView.delegate = self
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let scene = SCNScene()
         sceneView.scene = scene
-//        // Show statistics such as fps and timing information
-//        sceneView.showsStatistics = true
-//
+        // Show statistics such as fps and timing information
+        sceneView.showsStatistics = true
 
-//
-//        //添加一个地球到当前场景
-//        let sphere = SCNSphere(radius: 0.1) //球体
-//        let material = SCNMaterial() //渲染器
-//        material.diffuse.contents =  UIImage(named: "earth-diffuse.jpg") //平铺
-////        material.multiply.contents = UIImage(named: "earth-diffuse.jpg")
-//        material.emission.contents = UIImage(named: "earth-emissive-mini") //夜光
-//        material.specular.contents = UIImage(named: "earth-specular-mini") //镜面
-//        sphere.materials = [material] //渲染到球体上
-//        let sphereNode = SCNNode(geometry:sphere)
-//        sphereNode.position = SCNVector3(0,-0.5,-0.5)
-//        scene.rootNode.addChildNode(sphereNode)
+        targetView.center = self.view.center
+        self.view.addSubview(targetView)
+        targetView.layer.borderColor = UIColor.white.cgColor
+        targetView.layer.borderWidth = 2
+        targetView.layer.cornerRadius = 5
         
     }
     
@@ -56,31 +52,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
-
-    //将tranform(4x4矩阵)转换成SCNVector3
-    func positionOfTranform(_ tranform:matrix_float4x4) -> SCNVector3 {
-        return SCNVector3Make(tranform.columns.3.x,tranform.columns.3.y, tranform.columns.3.z)
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !isMeasuring{
+            if curLine != nil {
+                curLine = nil
+                vectorStart = SCNVector3Zero
+            }
+        }
+        
         isMeasuring = !isMeasuring
     }
     // MARK: - ARSCNViewDelegate
-    
-
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let sphere = SCNSphere(radius: 0.1) //球体 //单位：米
-        let material = SCNMaterial() //渲染器
-        material.diffuse.contents =  UIImage(named: "earth-diffuse.jpg") //平铺
-        //        material.multiply.contents = UIImage(named: "earth-diffuse.jpg")
-        material.emission.contents = UIImage(named: "earth-emissive-mini") //夜光
-        material.specular.contents = UIImage(named: "earth-specular-mini") //镜面
-        sphere.materials = [material] //渲染到球体上
-        let sphereNode = SCNNode(geometry:sphere)
-        sceneView.scene.rootNode.addChildNode(sphereNode)
-        return sphereNode
-    }
 
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         guard isMeasuring else {
@@ -91,27 +74,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         guard let result = results.first else {
             return
         }
-        if vectorStart == self.positionOfTranform(result.worldTransform) {
+        let worldPosition = self.positionOfTranform(result.worldTransform)
+        if vectorStart == worldPosition {
             return
         }
-//        if vectorStart == SCNVector3Zero {
-            vectorStart = self.positionOfTranform(result.worldTransform)
-//        }
-        Line(startVector: vectorStart, inView: sceneView)
+        if vectorStart == SCNVector3Zero {
+            vectorStart = worldPosition
+            curLine = Line(startVector: vectorStart, inView: sceneView)
+        }
+        curLine?.lineTo(worldPosition)
     }
     
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
+    //将tranform(4x4矩阵)转换成SCNVector3
+    func positionOfTranform(_ tranform:matrix_float4x4) -> SCNVector3 {
+        return SCNVector3Make(tranform.columns.3.x,tranform.columns.3.y, tranform.columns.3.z)
     }
 }
