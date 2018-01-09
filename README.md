@@ -16,4 +16,5 @@ height:0;">
 
 
 	
-<iframe width="560" height="315" src="https://github.com/Xieyupeng520/AZARDemoSwift/blob/master/resource/demo.mp4" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fK_zwl-lnmc" frameborder="0" allowfullscreen></iframe>
+
