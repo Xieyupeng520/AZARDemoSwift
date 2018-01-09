@@ -16,6 +16,7 @@
 		63A3A5F21FC925D20018EBDC /* AZSphereView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A3A5F11FC925D20018EBDC /* AZSphereView.swift */; };
 		63A3A5F41FC953400018EBDC /* SCNVector3+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A3A5F31FC953400018EBDC /* SCNVector3+Extension.swift */; };
 		63A3A6181FC96BC60018EBDC /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A3A6171FC96BC60018EBDC /* Line.swift */; };
+		63C19C0A2004818E00A2D155 /* demo.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C19C092004818E00A2D155 /* demo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		63A3A5F11FC925D20018EBDC /* AZSphereView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZSphereView.swift; sourceTree = "<group>"; };
 		63A3A5F31FC953400018EBDC /* SCNVector3+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extension.swift"; sourceTree = "<group>"; };
 		63A3A6171FC96BC60018EBDC /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		63C19C092004818E00A2D155 /* demo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demo.png; sourceTree = "<group>"; };
+		63C19C0B200481F600A2D155 /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +49,7 @@
 		63A3A5CF1FC914460018EBDC = {
 			isa = PBXGroup;
 			children = (
+				63C19C082004816000A2D155 /* resource */,
 				63A3A5DA1FC914460018EBDC /* AZARDemoSwift */,
 				63A3A5D91FC914460018EBDC /* Products */,
 			);
@@ -74,6 +78,15 @@
 				63A3A6171FC96BC60018EBDC /* Line.swift */,
 			);
 			path = AZARDemoSwift;
+			sourceTree = "<group>";
+		};
+		63C19C082004816000A2D155 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				63C19C092004818E00A2D155 /* demo.png */,
+				63C19C0B200481F600A2D155 /* demo.mp4 */,
+			);
+			path = resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63A3A5DE1FC914460018EBDC /* art.scnassets in Resources */,
+				63C19C0A2004818E00A2D155 /* demo.png in Resources */,
 				63A3A5E81FC914460018EBDC /* LaunchScreen.storyboard in Resources */,
 				63A3A5E51FC914460018EBDC /* Assets.xcassets in Resources */,
 				63A3A5E31FC914460018EBDC /* Main.storyboard in Resources */,
