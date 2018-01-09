@@ -13,3 +13,7 @@ height:0;">
 <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"  src="https://github.com/Xieyupeng520/AZARDemoSwift/blob/master/resource/demo.mp4" frameborder="0" allowfullscreen></iframe>
 </div>
 </div>
+
+
+	
+<iframe width="560" height="315" src="https://github.com/Xieyupeng520/AZARDemoSwift/blob/master/resource/demo.mp4" frameborder="0" allowfullscreen></iframe>
